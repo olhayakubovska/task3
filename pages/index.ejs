@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=<device-width>, initial-scale=1.0" /> -->
+    <title>Node simple Server</title>
+  </head>
+  <body>
+    <p>this is working</p>
+    <% if(flag){ %>
+    <div>flag</div>
+    <% } %>
+    <p><%= title %></p>
+    <div>
+      <form action="/" method="post">
+        <input type="text" name="title" required />
+        <button type="submit">click</button>
+      </form>
+      <%if(notes.length){%>
+
+      <div>
+        <% notes.forEach((item) => { %>
+        <div>
+          <%= item.title %>
+          <button data-type="remove" id="remove"  data-id="<%=item.id %>">&times</button>
+          <button data-type="update" id="showAlert" data-id="<%=item.id %>">
+            редактировать
+          </button>
+        </div>
+        <% }) %>
+      </div>
+
+      <%}else {%>
+      <div>No notes!</div>
+      <%}%>
+    </div>
+    <script src="/script.js"></script>
+  </body>
+</html>
