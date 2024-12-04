@@ -1,13 +1,8 @@
-// const buttonRemove = document.getElementById("remove");
-
 document.addEventListener("click", (event) => {
-  event.preventDefault();
-
   if (event.target.dataset.type === "remove") {
     const id = event.target.dataset.id;
-    // console.log("remove", id);
     remove(id).then(() => {
-      event.target.closest("div").remove();
+      event.target.closest("li").remove();
     });
   }
 });
@@ -18,36 +13,18 @@ const remove = async (id) => {
   });
 };
 
-// const button = document.getElementById("showAlert");
-
 document.addEventListener("click", async (event) => {
   if (event.target.dataset.type === "update") {
     const newNote = prompt("Введите новое значение");
     const id = event.target.dataset.id;
-    console.log(id, "idButton");
+    console.log(id, "idAddEvLis");
     await update(id, newNote);
-    console.log(newNote, "newNote", id, "idNote");
   }
 });
 
-// const update = async (id, newNote) => {
-//   console.log(id, newNote, "fetch");
-//   return fetch(`/${id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       id,
-//       title: newNote,
-//     }),
-//   });
-
-// };
 const update = async (id, newNote) => {
   console.log(id, newNote, "fetch");
 
-  // Отправка PUT-запроса на сервер
   const response = await fetch(`/${id}`, {
     method: "PUT",
     headers: {
@@ -57,4 +34,8 @@ const update = async (id, newNote) => {
       title: newNote,
     }),
   });
+  if (!response.ok) {
+    console.error("Server responded with an error!!!!!", response.status);
+    return;
+  }
 };

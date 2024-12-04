@@ -9,7 +9,6 @@ const __dirname = path.dirname(__filename);
 const notesPath = path.join(__dirname, "db.json");
 
 async function addNote(title) {
-  console.log("titl", title);
   const notes = await getNotes();
 
   const note = {

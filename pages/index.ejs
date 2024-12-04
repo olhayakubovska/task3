@@ -2,38 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <meta name="viewport" content="width=<device-width>, initial-scale=1.0" /> -->
-    <title>Node simple Server</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Node Simple Server</title>
   </head>
   <body>
-    <p>this is working</p>
-    <% if(flag){ %>
-    <div>flag</div>
+    <p>This is working</p>
+    <% if (flag) { %>
+    <p class="flag">Flag is true!</p>
     <% } %>
-    <p><%= title %></p>
-    <div>
-      <form action="/" method="post">
-        <input type="text" name="title" required />
-        <button type="submit">click</button>
-      </form>
-      <%if(notes.length){%>
 
-      <div>
-        <% notes.forEach((item) => { %>
-        <div>
-          <%= item.title %>
-          <button data-type="remove" id="remove"  data-id="<%=item.id %>">&times</button>
-          <button data-type="update" id="showAlert" data-id="<%=item.id %>">
-            редактировать
-          </button>
-        </div>
-        <% }) %>
-      </div>
+    <div class="title"><%= title %></div>
 
-      <%}else {%>
-      <div>No notes!</div>
-      <%}%>
-    </div>
+    <form action="/" method="post" id="noteForm">
+      <input type="text" name="title" required />
+      <button type="submit">Add Note</button>
+    </form>
+
+    <% if (notes.length) { %>
+    <ul class="notes">
+      <% notes.forEach((item) => { %>
+      <li>
+        <span><%= item.title %></span>
+        <button data-type="remove" data-id="<%= item.id %>">&times;</button>
+        <button data-type="update"  data-id="<%= item.id %>">
+          Edit
+        </button>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No notes!</p>
+    <% } %>
+
     <script src="/script.js"></script>
   </body>
 </html>
