@@ -2,11 +2,6 @@ document.addEventListener("click", (event) => {
   if (event.target.dataset.type === "remove") {
     const id = event.target.dataset.id;
     remove(id).then(() => {
-      //   const title = document.querySelector(".title");
-      //   title.innerHTML = "";
-      //   title.innerHTML = `
-      //   <div>Delete</div>
-      // `;
       const title = document.querySelector(".title");
       title.innerHTML = "";
 
@@ -24,22 +19,50 @@ const remove = async (id) =>
 
 document.addEventListener("click", async (event) => {
   if (event.target.dataset.type === "update") {
-    const newNote = prompt("Введите новое значение");
     const id = event.target.dataset.id;
-    if (event.target.dataset.title !== newNote) {
-      await update(id, newNote);
-      event.target.dataset.title = newNote;
+    const titleFromButton = event.target.dataset.title;
 
-      const noteSpan = event.target.closest("li").querySelector("span");
-      if (noteSpan) {
-        noteSpan.textContent = newNote;
-      }
+    const noteElement = event.target.closest("li");
+    noteElement.innerHTML = "";
+    const input = document.createElement("input");
+    const submitButton = document.createElement("button");
+    const cancelButton = document.createElement("button");
 
+    submitButton.textContent = "Save";
+    cancelButton.textContent = "Cancel";
+
+    submitButton.classList.add("notes-list__btn");
+    cancelButton.classList.add("notes-list__cancelBtn");
+    input.classList.add("note-form__input");
+    input.value = titleFromButton;
+    submitButton.addEventListener("click", async (event) => {
+      const newValue = input.value.trim();
+      await update(id, newValue);
+
+      input.remove();
+      submitButton.remove();
+      noteElement.innerHTML = `  
+        <span class="notes-list__title">${newValue}</span>
+        <button data-type="remove"    class="notes-list__button notes-list__button--remove" data-id=${id}>&times;</button>
+        <button data-type="update"    class="notes-list__button notes-list__button--remove" data-id=${id} data-title=${newValue}>
+          Edit
+        </button>
+      `;
       const title = document.querySelector(".title");
       title.innerHTML = "";
-
       title.innerHTML = `<div>Update</div>`;
-    }
+    });
+    cancelButton.addEventListener("click", (event) => {
+      noteElement.innerHTML = ` <span class="notes-list__title">${titleFromButton}</span>
+        <button data-type="remove"    class="notes-list__button notes-list__button--remove" data-id=${id}>&times;</button>
+        <button data-type="update"    class="notes-list__button notes-list__button--remove" data-id=${id} data-title=${titleFromButton}>
+          Edit
+        </button>`;
+    });
+
+    noteElement.appendChild(input);
+    noteElement.appendChild(submitButton);
+    noteElement.appendChild(cancelButton);
   }
 });
 
@@ -56,7 +79,7 @@ const update = async (id, newNote) => {
     }),
   });
   if (!response.ok) {
-    console.error("Server responded with an error!!!!!", response.status);
+    console.error("Server responded with an error", response.status);
     return;
   }
 };

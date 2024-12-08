@@ -1,7 +1,138 @@
 .flag {
   color: red;
+  text-align: center;
+  font-size: 45px;
+  font-weight: 800;
 }
 .title {
-  font-size: 30px;
-  color: blue;
+  text-align: center;
+  font-size: 45px;
+  font-weight: 800;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title-display {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title-display__text {
+  font-size: 1.5rem;
+  color: #6c757d;
+}
+
+.note-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.note-form__input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  height: 28px;
+  font-size: 20px;
+}
+
+.note-form__button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.note-form__button:hover {
+  background-color: #0056b3;
+}
+
+.notes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notes-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.notes-list__title {
+  flex-grow: 1;
+}
+
+.notes-list__button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 800;
+}
+.notes-list__btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(114, 114, 216);
+  font-weight: 800;
+  color: #fff;
+}
+.notes-list__cancelBtn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(139, 218, 117);
+  font-weight: 800;
+  color: #fff;
+}
+
+.notes-list__button--remove {
+  background-color: #dc3545;
+  color: #fff;
+  font-weight: 800;
+}
+
+.notes-list__button--remove:hover {
+  background-color: #bd2130;
+}
+
+.notes-list__button--edit {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.notes-list__button--edit:hover {
+  background-color: #e0a800;
+}
+
+.notes-list__empty {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6c757d;
 }

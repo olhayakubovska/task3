@@ -7,34 +7,47 @@
     <title>Node Simple Server</title>
   </head>
   <body>
-    <p>This is working</p>
-    <% if (flag) { %>
-    <p class="flag">Flag is true!</p>
-    <% } %>
+    <div class="container">
+      <div class="title"><%= text %></div>
 
-    <div class="title"><%= text %></div>
+      <form action="/" method="post" id="noteForm" class="note-form">
+        <input
+          type="text"
+          name="title"
+          placeholder="Leave note..."
+          class="note-form__input"
+          required
+        />
+        <button type="submit" class="note-form__button">Add</button>
+      </form>
 
-    <form action="/" method="post" id="noteForm">
-      <input type="text" name="title" required />
-      <button type="submit">Add Note</button>
-    </form>
-
-    <% if (notes.length) { %>
-    <ul class="notes">
-      <% notes.forEach((item) => { %>
-      <li>
-        <span><%= item.title %></span>
-        <button data-type="remove" data-id="<%= item.id %>">&times;</button>
-        <button data-type="update"  data-id="<%= item.id %>" data-title="<%= item.title%>">
-          Edit
-        </button>
-      </li>
-      <% }) %>
-    </ul>
-    <% } else { %>
-    <p>No notes!</p>
-    <% } %>
-
+      <% if (notes.length) { %>
+      <ul class="notes-list">
+        <% notes.forEach((item) => { %>
+        <li class="notes-list__item">
+          <span class="notes-list__title"><%= item.title %></span>
+          <button
+            class="notes-list__button notes-list__button--remove"
+            data-type="remove"
+            data-id="<%= item.id %>"
+          >
+            &times;
+          </button>
+          <button
+            class="notes-list__button notes-list__button--remove"
+            data-type="update"
+            data-id="<%= item.id %>"
+            data-title="<%= item.title%>"
+          >
+            Edit
+          </button>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <div class="notes-list__empty">No notes!</div>
+      <% } %>
+    </div>
     <script src="/script.js"></script>
   </body>
 </html>

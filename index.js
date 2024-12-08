@@ -1,8 +1,6 @@
-import http from "http";
 import chalk from "chalk";
 import path from "path";
 import { fileURLToPath } from "url";
-import fs from "fs/promises";
 import {
   addNote,
   getNotes,
@@ -37,18 +35,13 @@ app.get("/", async (req, res) => {
   res.render("index", {
     text: "Home",
     notes: await getNotes(),
-    flag: false,
+    flag: true,
   });
 });
 
 app.post("/", async (req, res) => {
   await addNote(req.body.title);
 
-  // res.render("index", {
-  //   title: "app",
-  //   notes: await getNotes(),
-  //   flag: true,
-  // });
   res.redirect("/");
 });
 
@@ -68,8 +61,6 @@ app.put("/:id", async (req, res) => {
     notes: newNotes,
     flag: true,
   });
-  // res.redirect("/");
-
 });
 
 app.listen(port, () => {
