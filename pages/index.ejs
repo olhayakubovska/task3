@@ -12,7 +12,7 @@
     <p class="flag">Flag is true!</p>
     <% } %>
 
-    <div class="title"><%= title %></div>
+    <div class="title"><%= text %></div>
 
     <form action="/" method="post" id="noteForm">
       <input type="text" name="title" required />
@@ -25,7 +25,7 @@
       <li>
         <span><%= item.title %></span>
         <button data-type="remove" data-id="<%= item.id %>">&times;</button>
-        <button data-type="update"  data-id="<%= item.id %>">
+        <button data-type="update"  data-id="<%= item.id %>" data-title="<%= item.title%>">
           Edit
         </button>
       </li>

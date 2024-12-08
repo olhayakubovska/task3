@@ -2,23 +2,44 @@ document.addEventListener("click", (event) => {
   if (event.target.dataset.type === "remove") {
     const id = event.target.dataset.id;
     remove(id).then(() => {
+      //   const title = document.querySelector(".title");
+      //   title.innerHTML = "";
+      //   title.innerHTML = `
+      //   <div>Delete</div>
+      // `;
+      const title = document.querySelector(".title");
+      title.innerHTML = "";
+
+      title.innerHTML = `<div>Delete</div>`;
+
       event.target.closest("li").remove();
     });
   }
 });
 
-const remove = async (id) => {
-  return fetch(`/${id}`, {
+const remove = async (id) =>
+  await fetch(`/${id}`, {
     method: "DELETE",
   });
-};
 
 document.addEventListener("click", async (event) => {
   if (event.target.dataset.type === "update") {
     const newNote = prompt("Введите новое значение");
     const id = event.target.dataset.id;
-    console.log(id, "idAddEvLis");
-    await update(id, newNote);
+    if (event.target.dataset.title !== newNote) {
+      await update(id, newNote);
+      event.target.dataset.title = newNote;
+
+      const noteSpan = event.target.closest("li").querySelector("span");
+      if (noteSpan) {
+        noteSpan.textContent = newNote;
+      }
+
+      const title = document.querySelector(".title");
+      title.innerHTML = "";
+
+      title.innerHTML = `<div>Update</div>`;
+    }
   }
 });
 

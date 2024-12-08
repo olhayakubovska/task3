@@ -14,9 +14,9 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-const __filename = fileURLToPath(import.meta.url); 
+const __filename = fileURLToPath(import.meta.url);
 
-const __dirname = path.dirname(__filename); 
+const __dirname = path.dirname(__filename);
 
 const basePath = path.join(__dirname, "pages");
 
@@ -33,11 +33,9 @@ app.set("views", path.join(__dirname, "pages"));
 
 app.use(express.static(path.resolve(__dirname, "public")));
 
-
-
 app.get("/", async (req, res) => {
   res.render("index", {
-    title: "Home",
+    text: "Home",
     notes: await getNotes(),
     flag: false,
   });
@@ -45,17 +43,19 @@ app.get("/", async (req, res) => {
 
 app.post("/", async (req, res) => {
   await addNote(req.body.title);
-  res.render("index", {
-    title: "app",
-    notes: await getNotes(),
-    flag: true,
-  });
+
+  // res.render("index", {
+  //   title: "app",
+  //   notes: await getNotes(),
+  //   flag: true,
+  // });
+  res.redirect("/");
 });
 
 app.delete("/:id", async (req, res) => {
   await removeItem(req.params.id);
   res.render("index", {
-    title: "delete",
+    text: "delete",
     notes: await getNotes(),
     flag: false,
   });
@@ -63,12 +63,13 @@ app.delete("/:id", async (req, res) => {
 
 app.put("/:id", async (req, res) => {
   const newNotes = await updateItem(req.params.id, req.body.title);
-
   res.render("index", {
-    title: "updated app",
+    text: "updated app",
     notes: newNotes,
     flag: true,
   });
+  // res.redirect("/");
+
 });
 
 app.listen(port, () => {
